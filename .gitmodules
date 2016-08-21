@@ -1,0 +1,3 @@
+[submodule "resturant/public/swagger"]
+	path = resturant/public/swagger
+	url = https://github.com/swagger-api/swagger-ui.git
