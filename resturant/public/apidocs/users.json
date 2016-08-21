@@ -5,9 +5,61 @@
   "resourcePath": "users",
   "apis": [
     {
+      "path": "/users/authenticate.json",
+      "operations": [
+        {
+          "parameters": [
+            {
+              "paramType": "form",
+              "name": "email",
+              "type": "string",
+              "description": "Email address",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "password",
+              "type": "string",
+              "description": "Password",
+              "required": true
+            }
+          ],
+          "summary": "Logs in a User",
+          "responseMessages": [
+            {
+              "code": 401,
+              "responseModel": null,
+              "message": "Unauthorized"
+            },
+            {
+              "code": 404,
+              "responseModel": null,
+              "message": "Not Found"
+            },
+            {
+              "code": 406,
+              "responseModel": null,
+              "message": "Not Acceptable"
+            }
+          ],
+          "nickname": "Users#authenticate",
+          "method": "post"
+        }
+      ]
+    },
+    {
       "path": "/users.json",
       "operations": [
         {
+          "parameters": [
+            {
+              "paramType": "header",
+              "name": "auth_token",
+              "type": "string",
+              "description": "Authentication token",
+              "required": false
+            }
+          ],
           "summary": "Fetches all User items",
           "notes": "This lists all the active users",
           "responseMessages": [
@@ -36,20 +88,14 @@
       "path": "/users.json",
       "operations": [
         {
-          "summary": "Creates a new User",
-          "responseMessages": [
-            {
-              "code": 401,
-              "responseModel": null,
-              "message": "Unauthorized"
-            },
-            {
-              "code": 406,
-              "responseModel": null,
-              "message": "Not Acceptable"
-            }
-          ],
           "parameters": [
+            {
+              "paramType": "header",
+              "name": "auth_token",
+              "type": "string",
+              "description": "Authentication token",
+              "required": false
+            },
             {
               "paramType": "form",
               "name": "user[name]",
@@ -99,6 +145,19 @@
               }
             }
           ],
+          "summary": "Creates a new User",
+          "responseMessages": [
+            {
+              "code": 401,
+              "responseModel": null,
+              "message": "Unauthorized"
+            },
+            {
+              "code": 406,
+              "responseModel": null,
+              "message": "Not Acceptable"
+            }
+          ],
           "nickname": "Users#create",
           "method": "post"
         }
@@ -108,6 +167,22 @@
       "path": "/users/{id}.json",
       "operations": [
         {
+          "parameters": [
+            {
+              "paramType": "header",
+              "name": "auth_token",
+              "type": "string",
+              "description": "Authentication token",
+              "required": false
+            },
+            {
+              "paramType": "path",
+              "name": "id",
+              "type": "integer",
+              "description": "User Id",
+              "required": false
+            }
+          ],
           "summary": "Fetches a single User item",
           "responseMessages": [
             {
@@ -131,15 +206,6 @@
               "message": "Not Acceptable"
             }
           ],
-          "parameters": [
-            {
-              "paramType": "path",
-              "name": "id",
-              "type": "integer",
-              "description": "User Id",
-              "required": false
-            }
-          ],
           "nickname": "Users#show",
           "method": "get"
         }
@@ -149,6 +215,70 @@
       "path": "/users/{id}.json",
       "operations": [
         {
+          "parameters": [
+            {
+              "paramType": "header",
+              "name": "auth_token",
+              "type": "string",
+              "description": "Authentication token",
+              "required": false
+            },
+            {
+              "paramType": "path",
+              "name": "id",
+              "type": "integer",
+              "description": "User Id",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "user[name]",
+              "type": "string",
+              "description": "Name",
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "user[address]",
+              "type": "string",
+              "description": "Address",
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "user[phone]",
+              "type": "string",
+              "description": "Phone",
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "user[email]",
+              "type": "string",
+              "description": "Email address",
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "user[password]",
+              "type": "string",
+              "description": "Password",
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "user[role]",
+              "type": "string",
+              "description": "Role  [ 'admin', 'manager', 'customer' ]",
+              "required": false,
+              "allowableValues": {
+                "valueType": "LIST",
+                "values": [
+
+                ]
+              }
+            }
+          ],
           "summary": "Updates an existing User",
           "responseMessages": [
             {
@@ -167,43 +297,6 @@
               "message": "Not Acceptable"
             }
           ],
-          "parameters": [
-            {
-              "paramType": "path",
-              "name": "id",
-              "type": "integer",
-              "description": "User Id",
-              "required": true
-            },
-            {
-              "paramType": "form",
-              "name": "address",
-              "type": "string",
-              "description": "Address",
-              "required": false
-            },
-            {
-              "paramType": "form",
-              "name": "phone",
-              "type": "string",
-              "description": "Phone",
-              "required": false
-            },
-            {
-              "paramType": "form",
-              "name": "email",
-              "type": "string",
-              "description": "Email address",
-              "required": false
-            },
-            {
-              "paramType": "form",
-              "name": "password",
-              "type": "string",
-              "description": "Password",
-              "required": false
-            }
-          ],
           "nickname": "Users#update",
           "method": "patch"
         }
@@ -213,6 +306,22 @@
       "path": "/users/{id}.json",
       "operations": [
         {
+          "parameters": [
+            {
+              "paramType": "header",
+              "name": "auth_token",
+              "type": "string",
+              "description": "Authentication token",
+              "required": false
+            },
+            {
+              "paramType": "path",
+              "name": "id",
+              "type": "integer",
+              "description": "User Id",
+              "required": true
+            }
+          ],
           "summary": "Deletes an existing User item",
           "responseMessages": [
             {
@@ -224,15 +333,6 @@
               "code": 404,
               "responseModel": null,
               "message": "Not Found"
-            }
-          ],
-          "parameters": [
-            {
-              "paramType": "path",
-              "name": "id",
-              "type": "integer",
-              "description": "User Id",
-              "required": false
             }
           ],
           "nickname": "Users#destroy",

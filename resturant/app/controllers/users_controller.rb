@@ -1,6 +1,8 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :update, :destroy]
-  before_action :authenticate_request, only: [:update, :destroy]
+  before_action :authenticate_request, only: [:index, :show, :update, :destroy]
+  before_action :authorize_employee_request, only: [:index, :show]
+  before_action :authorize_admin_request, only: [:delete]
 
   swagger_controller :users, "User Management"
 
@@ -36,10 +38,12 @@ class UsersController < ApplicationController
   swagger_api :update do
     summary "Updates an existing User"
     param :path, :id, :integer, :required, "User Id"
-    param :form, :address, :string, :optional, "Address"
-    param :form, :phone, :string, :optional, "Phone"
-    param :form, :email, :string, :optional, "Email address"
-    param :form, :password, :string, :optional, "Password"
+    param :form, "user[name]", :string, :optional, "Name"
+    param :form, "user[address]", :string, :optional, "Address"
+    param :form, "user[phone]", :string, :optional, "Phone"
+    param :form, "user[email]", :string, :optional, "Email address"
+    param :form, "user[password]", :string, :optional, "Password"
+    param_list :form, "user[role]", :string, :optional, "Role  [ 'admin', 'manager', 'customer' ]"
     response :unauthorized
     response :not_found
     response :not_acceptable
@@ -47,9 +51,18 @@ class UsersController < ApplicationController
 
   swagger_api :destroy do
     summary "Deletes an existing User item"
-    param :path, :id, :integer, :optional, "User Id"
+    param :path, :id, :integer, :required, "User Id"
     response :unauthorized
     response :not_found
+  end
+
+  swagger_api :authenticate do
+    summary "Logs in a User"
+    param :form, :email, :string, :required, "Email address"
+    param :form, :password, :string, :required, "Password"
+    response :unauthorized
+    response :not_found
+    response :not_acceptable
   end
 
 
@@ -68,28 +81,48 @@ class UsersController < ApplicationController
 
   # POST /users
   def create
-    print user_params
-    @user = User.new(user_params)
-
-    if @user.save
-      render json: @user, status: :created, location: @user
+    if @current_user.role != "admin" and (user_params["user"["role"]] == "admin" or user_params["user"["role"]] == "manager")
+      response :unauthorized
     else
-      render json: @user.errors, status: :unprocessable_entity
+      @user = User.new(user_params)
+      if @user.save
+        render json: @user, status: :created, location: @user
+      else
+        render json: @user.errors, status: :unprocessable_entity
+      end
     end
   end
 
   # PATCH/PUT /users/1
   def update
-    if @user.update(user_params)
-      render json: @user
+    if @current_user == @user or @current_user.role == "admin"
+      if @current_user.role != "admin" and (user_params["user"["role"]] == "admin" or user_params["user"["role"]] == "manager")
+        response :unauthorized
+      else
+        if @user.update(user_params)
+          render json: @user
+        else
+          render json: @user.errors, status: :unprocessable_entity
+        end
+      end
     else
-      render json: @user.errors, status: :unprocessable_entity
+      response :unauthorized
     end
   end
 
   # DELETE /users/1
   def destroy
     @user.destroy
+  end
+
+  def authenticate
+    command = AuthenticateUser.call(params[:email], params[:password])
+
+    if command.success?
+      render json: { auth_token: command.result }
+    else
+      render json: { error: command.errors }, status: :unauthorized
+    end
   end
 
   private

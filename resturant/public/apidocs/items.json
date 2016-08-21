@@ -8,6 +8,22 @@
       "path": "/items.json",
       "operations": [
         {
+          "parameters": [
+            {
+              "paramType": "header",
+              "name": "auth_token",
+              "type": "string",
+              "description": "Authentication token",
+              "required": false
+            },
+            {
+              "paramType": "query",
+              "name": "page",
+              "type": "integer",
+              "description": "Page number",
+              "required": false
+            }
+          ],
           "summary": "Returns all items",
           "notes": "This lists all the active users",
           "responseMessages": [
@@ -15,15 +31,6 @@
               "code": 500,
               "responseModel": null,
               "message": "Requested Range Not Satisfiable"
-            }
-          ],
-          "parameters": [
-            {
-              "paramType": "query",
-              "name": "page",
-              "type": "integer",
-              "description": "Page number",
-              "required": false
             }
           ],
           "nickname": "Items#index",
@@ -35,20 +42,14 @@
       "path": "/items.json",
       "operations": [
         {
-          "summary": "Creates a new Item",
-          "responseMessages": [
-            {
-              "code": 401,
-              "responseModel": null,
-              "message": "Unauthorized"
-            },
-            {
-              "code": 406,
-              "responseModel": null,
-              "message": "Not Acceptable"
-            }
-          ],
           "parameters": [
+            {
+              "paramType": "header",
+              "name": "auth_token",
+              "type": "string",
+              "description": "Authentication token",
+              "required": false
+            },
             {
               "paramType": "form",
               "name": "name",
@@ -71,6 +72,19 @@
               "required": true
             }
           ],
+          "summary": "Creates a new Item",
+          "responseMessages": [
+            {
+              "code": 401,
+              "responseModel": null,
+              "message": "Unauthorized"
+            },
+            {
+              "code": 406,
+              "responseModel": null,
+              "message": "Not Acceptable"
+            }
+          ],
           "nickname": "Items#create",
           "method": "post"
         }
@@ -80,6 +94,22 @@
       "path": "/items/{id}.json",
       "operations": [
         {
+          "parameters": [
+            {
+              "paramType": "header",
+              "name": "auth_token",
+              "type": "string",
+              "description": "Authentication token",
+              "required": false
+            },
+            {
+              "paramType": "path",
+              "name": "id",
+              "type": "integer",
+              "description": "Item Id",
+              "required": false
+            }
+          ],
           "summary": "Fetches a single Item",
           "responseMessages": [
             {
@@ -103,15 +133,6 @@
               "message": "Not Acceptable"
             }
           ],
-          "parameters": [
-            {
-              "paramType": "path",
-              "name": "id",
-              "type": "integer",
-              "description": "Item Id",
-              "required": false
-            }
-          ],
           "nickname": "Items#show",
           "method": "get"
         }
@@ -121,25 +142,14 @@
       "path": "/items/{id}.json",
       "operations": [
         {
-          "summary": "Updates an existing Item",
-          "responseMessages": [
-            {
-              "code": 401,
-              "responseModel": null,
-              "message": "Unauthorized"
-            },
-            {
-              "code": 404,
-              "responseModel": null,
-              "message": "Not Found"
-            },
-            {
-              "code": 406,
-              "responseModel": null,
-              "message": "Not Acceptable"
-            }
-          ],
           "parameters": [
+            {
+              "paramType": "header",
+              "name": "auth_token",
+              "type": "string",
+              "description": "Authentication token",
+              "required": false
+            },
             {
               "paramType": "path",
               "name": "id",
@@ -169,6 +179,24 @@
               "required": false
             }
           ],
+          "summary": "Updates an existing Item",
+          "responseMessages": [
+            {
+              "code": 401,
+              "responseModel": null,
+              "message": "Unauthorized"
+            },
+            {
+              "code": 404,
+              "responseModel": null,
+              "message": "Not Found"
+            },
+            {
+              "code": 406,
+              "responseModel": null,
+              "message": "Not Acceptable"
+            }
+          ],
           "nickname": "Items#update",
           "method": "patch"
         }
@@ -178,6 +206,22 @@
       "path": "/items/{id}.json",
       "operations": [
         {
+          "parameters": [
+            {
+              "paramType": "header",
+              "name": "auth_token",
+              "type": "string",
+              "description": "Authentication token",
+              "required": false
+            },
+            {
+              "paramType": "path",
+              "name": "id",
+              "type": "integer",
+              "description": "Item Id",
+              "required": false
+            }
+          ],
           "summary": "Deletes an existing User item",
           "responseMessages": [
             {
@@ -189,15 +233,6 @@
               "code": 404,
               "responseModel": null,
               "message": "Not Found"
-            }
-          ],
-          "parameters": [
-            {
-              "paramType": "path",
-              "name": "id",
-              "type": "integer",
-              "description": "Item Id",
-              "required": false
             }
           ],
           "nickname": "Items#destroy",

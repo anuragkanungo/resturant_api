@@ -1,7 +1,8 @@
 class ItemsController < ApplicationController
   include Swagger::Docs::ImpotentMethods
   before_action :set_item, only: [:show, :update, :destroy]
-  before_action :authenticate_request, only: [:new, :create, :edit, :save]
+  before_action :authenticate_request
+  before_action :authorize_employee_request
 
   swagger_controller :items, 'Items'
 

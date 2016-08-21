@@ -25,8 +25,8 @@ class AuthenticateApiRequest
   end
 
   def http_auth_header
-    if headers['Authentication'].present?
-      return headers['Authentication'].split(' ').last
+    if headers['HTTP_AUTH_TOKEN'].present?
+      return headers['HTTP_AUTH_TOKEN'].split(' ').last
     else
       errors.add :token, 'Missing token'
     end
