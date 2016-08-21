@@ -1,11 +1,21 @@
 class ItemsController < ApplicationController
   before_action :set_item, only: [:show, :update, :destroy]
 
+  respond_to :json
+
+  swagger_controller :items, 'Items'
+
+  swagger_api :index do
+    summary 'Returns all items'
+    notes 'All the items'
+  end
+
+
   # GET /items
   def index
     @items = Item.all
 
-    render json: @items
+    render json: @items, status: :ok
   end
 
   # GET /items/1
