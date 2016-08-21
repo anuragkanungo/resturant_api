@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
-  resources :customers
-  resources :employees
+  resources :users
+  resources :customers, :controller => "users", :type => "Customer"
+  resources :employees, :controller => "users", :type => "Employee"
   resources :orders
   resources :menus
   resources :items
