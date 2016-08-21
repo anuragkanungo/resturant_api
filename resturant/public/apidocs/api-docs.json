@@ -8,6 +8,10 @@
       "description": "User Management"
     },
     {
+      "path": "/menus.{format}",
+      "description": "Items"
+    },
+    {
       "path": "/items.{format}",
       "description": "Items"
     }

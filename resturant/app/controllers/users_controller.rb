@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :update, :destroy]
-  before_action :authenticate_request, only: [:index, :show, :update, :destroy]
+  before_action :authenticate_request, only: [:index, :create, :show, :update, :destroy]
   before_action :authorize_employee_request, only: [:index, :show]
   before_action :authorize_admin_request, only: [:delete]
 
@@ -81,23 +81,37 @@ class UsersController < ApplicationController
 
   # POST /users
   def create
-    if @current_user.role != "admin" and (user_params["user"["role"]] == "admin" or user_params["user"["role"]] == "manager")
-      response :unauthorized
-    else
-      @user = User.new(user_params)
-      if @user.save
-        render json: @user, status: :created, location: @user
+    if @current_user != nil
+      if @current_user.role != "admin" and (user_params["role"] == "admin" or user_params["role"] == "manager")
+        render json: { error: "unauthorized" }, status: :unauthorized
       else
-        render json: @user.errors, status: :unprocessable_entity
+        @user = User.new(user_params)
+        if @user.save
+          render json: @user, status: :created, location: @user
+        else
+          render json: @user.errors, status: :unprocessable_entity
+        end
       end
+    else
+        print user_params["role"]
+        if user_params["role"] == "admin" or user_params["role"] == "manager"
+          render json: { error: "unauthorized" }, status: :unauthorized
+        else
+          @user = User.new(user_params)
+          if @user.save
+            render json: @user, status: :created, location: @user
+          else
+            render json: @user.errors, status: :unprocessable_entity
+          end
+        end
     end
   end
 
   # PATCH/PUT /users/1
   def update
     if @current_user == @user or @current_user.role == "admin"
-      if @current_user.role != "admin" and (user_params["user"["role"]] == "admin" or user_params["user"["role"]] == "manager")
-        response :unauthorized
+      if @current_user.role != "admin" and (user_params["role"] == "admin" or user_params["role"] == "manager")
+        render json: { error: "unauthorized" }, status: :unauthorized
       else
         if @user.update(user_params)
           render json: @user
@@ -106,7 +120,7 @@ class UsersController < ApplicationController
         end
       end
     else
-      response :unauthorized
+      render json: { error: "unauthorized" }, status: :unauthorized
     end
   end
 

@@ -4,8 +4,6 @@ Rails.application.routes.draw do
       post 'authenticate'
     end
   end
-  resources :customers, :controller => "users", :type => "Customer"
-  resources :employees, :controller => "users", :type => "Employee"
   resources :orders
   resources :menus
   resources :items

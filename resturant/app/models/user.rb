@@ -5,6 +5,7 @@ class User < ApplicationRecord
   validates :password, presence: true, length: { minimum: 6 }, on: :create
   validates :role, inclusion: { in: %w(admin manager customer),
     message: "%{value} is not a valid role" }, allow_nil: false
+  has_many :orders
 
    # Exclude password info from xml output.
    def to_xml(options={})

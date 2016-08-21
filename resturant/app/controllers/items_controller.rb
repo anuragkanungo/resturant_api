@@ -8,8 +8,7 @@ class ItemsController < ApplicationController
 
   swagger_api :index do
     summary 'Returns all items'
-    notes "This lists all the active users"
-    param :query, :page, :integer, :optional, "Page number"
+    notes "This lists all the items"
     response :requested_range_not_satisfiable
   end
 

@@ -2,10 +2,10 @@
   "apiVersion": "1.0",
   "swaggerVersion": "1.2",
   "basePath": "http://localhost:3000",
-  "resourcePath": "items",
+  "resourcePath": "menus",
   "apis": [
     {
-      "path": "/items.json",
+      "path": "/menus.json",
       "operations": [
         {
           "parameters": [
@@ -17,8 +17,8 @@
               "required": false
             }
           ],
-          "summary": "Returns all items",
-          "notes": "This lists all the items",
+          "summary": "Returns all menus",
+          "notes": "This lists all the menus",
           "responseMessages": [
             {
               "code": 500,
@@ -26,13 +26,13 @@
               "message": "Requested Range Not Satisfiable"
             }
           ],
-          "nickname": "Items#index",
+          "nickname": "Menus#index",
           "method": "get"
         }
       ]
     },
     {
-      "path": "/items.json",
+      "path": "/menus.json",
       "operations": [
         {
           "parameters": [
@@ -45,27 +45,20 @@
             },
             {
               "paramType": "form",
-              "name": "name",
+              "name": "types",
               "type": "string",
-              "description": "Name",
+              "description": "Type such as ['breakfast','lunch','dinner']",
               "required": true
             },
             {
               "paramType": "form",
-              "name": "description",
-              "type": "string",
-              "description": "Description",
-              "required": true
-            },
-            {
-              "paramType": "form",
-              "name": "price",
-              "type": "decimal",
-              "description": "Price",
-              "required": true
+              "name": "items_id",
+              "type": "array",
+              "description": "The items id to add",
+              "required": false
             }
           ],
-          "summary": "Creates a new Item",
+          "summary": "Creates a new Menu",
           "responseMessages": [
             {
               "code": 401,
@@ -78,13 +71,13 @@
               "message": "Not Acceptable"
             }
           ],
-          "nickname": "Items#create",
+          "nickname": "Menus#create",
           "method": "post"
         }
       ]
     },
     {
-      "path": "/items/{id}.json",
+      "path": "/menus/{id}.json",
       "operations": [
         {
           "parameters": [
@@ -99,11 +92,11 @@
               "paramType": "path",
               "name": "id",
               "type": "integer",
-              "description": "Item Id",
+              "description": "Menu Id",
               "required": false
             }
           ],
-          "summary": "Fetches a single Item",
+          "summary": "Fetches a single Menu",
           "responseMessages": [
             {
               "code": 200,
@@ -126,13 +119,13 @@
               "message": "Not Acceptable"
             }
           ],
-          "nickname": "Items#show",
+          "nickname": "Menus#show",
           "method": "get"
         }
       ]
     },
     {
-      "path": "/items/{id}.json",
+      "path": "/menus/{id}.json",
       "operations": [
         {
           "parameters": [
@@ -152,23 +145,9 @@
             },
             {
               "paramType": "form",
-              "name": "name",
+              "name": "types",
               "type": "string",
-              "description": "Name",
-              "required": false
-            },
-            {
-              "paramType": "form",
-              "name": "description",
-              "type": "string",
-              "description": "Description",
-              "required": false
-            },
-            {
-              "paramType": "form",
-              "name": "price",
-              "type": "decimal",
-              "description": "Price",
+              "description": "type",
               "required": false
             }
           ],
@@ -190,13 +169,13 @@
               "message": "Not Acceptable"
             }
           ],
-          "nickname": "Items#update",
+          "nickname": "Menus#update",
           "method": "patch"
         }
       ]
     },
     {
-      "path": "/items/{id}.json",
+      "path": "/menus/{id}.json",
       "operations": [
         {
           "parameters": [
@@ -211,7 +190,7 @@
               "paramType": "path",
               "name": "id",
               "type": "integer",
-              "description": "Item Id",
+              "description": "Menu Id",
               "required": false
             }
           ],
@@ -228,11 +207,42 @@
               "message": "Not Found"
             }
           ],
-          "nickname": "Items#destroy",
+          "nickname": "Menus#destroy",
           "method": "delete"
         }
       ]
     }
   ],
-  "authorizations": null
+  "authorizations": null,
+  "models": {
+    "Item": {
+      "id": "Item",
+      "required": [
+        "id"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "description": "Item Id"
+        }
+      },
+      "description": "A Item object"
+    },
+    "Items": {
+      "id": "Items",
+      "required": [
+        "items"
+      ],
+      "properties": {
+        "items": {
+          "type": "array",
+          "description": "A list of items",
+          "items": {
+            "$ref": "Item"
+          }
+        }
+      },
+      "description": "Items"
+    }
+  }
 }
