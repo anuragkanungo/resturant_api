@@ -3,7 +3,16 @@
   "swaggerVersion": "1.2",
   "basePath": "http://localhost:3000",
   "apis": [
-
+    {
+      "path": "/items.{format}",
+      "description": "Items"
+    }
   ],
-  "authorizations": null
+  "authorizations": null,
+  "info": {
+    "title": "Swagger Sample App",
+    "description": "This is a sample description.",
+    "license": "Apache 2.0",
+    "licenseUrl": "http://www.apache.org/licenses/LICENSE-2.0.html"
+  }
 }

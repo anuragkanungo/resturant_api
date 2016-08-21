@@ -1,5 +1,6 @@
 class MenusController < ApplicationController
   before_action :set_menu, only: [:show, :update, :destroy]
+  before_action :authenticate_request, only: [:new, :create, :edit, :save]
 
   # GET /menus
   def index
