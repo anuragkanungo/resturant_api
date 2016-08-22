@@ -32,7 +32,7 @@ class MenusController < ApplicationController
 
   swagger_api :create do
     summary "Creates a new Menu"
-    param :form, :types, :string, :required, "Type such as ['breakfast','lunch','dinner']"
+    param :form, :types, :string, :required, "Type such as 'breakfast','lunch','dinner'"
     param :form, :items_id, :array, :optional, "The items id to add"
     response :unauthorized
     response :not_acceptable
@@ -41,7 +41,8 @@ class MenusController < ApplicationController
   swagger_api :update do
     summary "Updates an existing Item"
     param :path, :id, :integer, :required, "Item Id"
-    param :form, :types, :string, :optional, "type"
+    param :form, :types, :string, :optional, "Type such as 'breakfast','lunch','dinner'"
+    param :form, :items_id, :array, :optional, "The items id to add"
     response :unauthorized
     response :not_found
     response :not_acceptable

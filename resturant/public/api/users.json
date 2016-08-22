@@ -58,9 +58,19 @@
               "type": "string",
               "description": "Authentication token",
               "required": false
+            },
+            {
+              "paramType": "query",
+              "name": "page",
+              "type": "integer",
+              "description": "Page number",
+              "required": false
             }
           ],
-          "summary": "Fetches all User items",
+          "summary": [
+            "Fetches all User items",
+            "Fetches all UserOrder items"
+          ],
           "notes": "This lists all the active users",
           "responseMessages": [
             {
@@ -72,6 +82,21 @@
               "code": 406,
               "responseModel": null,
               "message": "The request you made is not acceptable"
+            },
+            {
+              "code": 500,
+              "responseModel": null,
+              "message": "Requested Range Not Satisfiable"
+            },
+            {
+              "code": 401,
+              "responseModel": null,
+              "message": "Unauthorized"
+            },
+            {
+              "code": 406,
+              "responseModel": null,
+              "message": "Not Acceptable"
             },
             {
               "code": 500,

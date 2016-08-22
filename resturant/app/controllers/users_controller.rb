@@ -66,6 +66,19 @@ class UsersController < ApplicationController
   end
 
 
+swagger_controller :user_orders, "User Orders"
+
+swagger_api :index do
+    summary "Fetches all UserOrder items"
+    param :path, :user_id, :integer, :required, "User Id"
+    param :query, :page, :integer, :optional, "Page number"
+    response :unauthorized
+    response :not_acceptable
+    response :requested_range_not_satisfiable
+  end
+
+
+
 
   # GET /users
   def index

@@ -47,7 +47,7 @@
               "paramType": "form",
               "name": "types",
               "type": "string",
-              "description": "Type such as ['breakfast','lunch','dinner']",
+              "description": "Type such as 'breakfast','lunch','dinner'",
               "required": true
             },
             {
@@ -147,7 +147,14 @@
               "paramType": "form",
               "name": "types",
               "type": "string",
-              "description": "type",
+              "description": "Type such as 'breakfast','lunch','dinner'",
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "items_id",
+              "type": "array",
+              "description": "The items id to add",
               "required": false
             }
           ],
