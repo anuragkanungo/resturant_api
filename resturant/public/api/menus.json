@@ -45,14 +45,14 @@
             },
             {
               "paramType": "form",
-              "name": "types",
+              "name": "menu[types]",
               "type": "string",
               "description": "Type such as 'breakfast','lunch','dinner'",
               "required": true
             },
             {
               "paramType": "form",
-              "name": "items_id",
+              "name": "menu[items_id]",
               "type": "array",
               "description": "The items id to add",
               "required": false
@@ -140,25 +140,25 @@
               "paramType": "path",
               "name": "id",
               "type": "integer",
-              "description": "Item Id",
+              "description": "Menu Id",
               "required": true
             },
             {
               "paramType": "form",
-              "name": "types",
+              "name": "menu[types]",
               "type": "string",
               "description": "Type such as 'breakfast','lunch','dinner'",
               "required": false
             },
             {
               "paramType": "form",
-              "name": "items_id",
+              "name": "menu[items_id]",
               "type": "array",
               "description": "The items id to add",
               "required": false
             }
           ],
-          "summary": "Updates an existing Item",
+          "summary": "Updates an existing Menu",
           "responseMessages": [
             {
               "code": 401,
@@ -201,7 +201,7 @@
               "required": false
             }
           ],
-          "summary": "Deletes an existing User item",
+          "summary": "Deletes an existing Menu",
           "responseMessages": [
             {
               "code": 401,
@@ -220,36 +220,5 @@
       ]
     }
   ],
-  "authorizations": null,
-  "models": {
-    "Item": {
-      "id": "Item",
-      "required": [
-        "id"
-      ],
-      "properties": {
-        "id": {
-          "type": "integer",
-          "description": "Item Id"
-        }
-      },
-      "description": "A Item object"
-    },
-    "Items": {
-      "id": "Items",
-      "required": [
-        "items"
-      ],
-      "properties": {
-        "items": {
-          "type": "array",
-          "description": "A list of items",
-          "items": {
-            "$ref": "Item"
-          }
-        }
-      },
-      "description": "Items"
-    }
-  }
+  "authorizations": null
 }

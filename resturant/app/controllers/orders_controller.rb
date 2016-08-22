@@ -2,15 +2,15 @@ class OrdersController < ApplicationController
   before_action :set_order, only: [:show, :update, :destroy]
   before_action :authenticate_request
 
-  swagger_model :Item do
-    description "A Item object"
-    property :id, :integer, :required, "Item Id"
-  end
+  # swagger_model :Item do
+  #   description "A Item object"
+  #   property :id, :integer, :required, "Item Id"
+  # end
 
-  swagger_model :Items do
-    description "Items"
-    property :items, :array, :required, "A list of items", { "items" => { "$ref" => "Item" } }
-  end
+  # swagger_model :Items do
+  #   description "Items"
+  #   property :items, :array, :required, "A list of items", { "items" => { "$ref" => "Item" } }
+  # end
 
   swagger_controller :orders, 'Orders'
 
@@ -31,8 +31,9 @@ class OrdersController < ApplicationController
 
   swagger_api :create do
     summary "Creates a new Order"
-    param :form, :amount, :integer, :required, "The amount of order"
-    param :form, :items_id, :array, :required, "The items id to add"
+    param :form, "order[amount]", :integer, :required, "The amount of order"
+    param :form, "order[items_id]", :array, :required, "The items id to add"
+    param :form, "order[user_id]", :array, :required, "The items id to add"
     response :unauthorized
     response :not_acceptable
   end
@@ -40,8 +41,9 @@ class OrdersController < ApplicationController
   swagger_api :update do
     summary "Updates an existing Order"
     param :path, :id, :integer, :required, "Order Id"
-    param :form, :amount, :integer, :optional, "The amount of order"
-    param :form, :items_id, :array, :optional, "The items id to add"
+    param :form, "order[amount]", :integer, :optional, "The amount of order"
+    param :form, "order[items_id]", :array, :optional, "The items id to add"
+    param :form, "order[user_id]", :array, :optional, "The items id to add"
     response :unauthorized
     response :not_found
     response :not_acceptable

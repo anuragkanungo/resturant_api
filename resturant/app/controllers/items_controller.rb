@@ -42,7 +42,7 @@ class ItemsController < ApplicationController
   end
 
   swagger_api :destroy do
-    summary "Deletes an existing User item"
+    summary "Deletes an existing item"
     param :path, :id, :integer, :optional, "Item Id"
     response :unauthorized
     response :not_found

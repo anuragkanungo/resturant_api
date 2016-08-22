@@ -3,17 +3,7 @@ class MenusController < ApplicationController
   before_action :authenticate_request, only: [:create, :update, :destroy]
   before_action :authorize_employee_request, only: [:create, :update, :destroy]
 
-  swagger_model :Item do
-    description "A Item object"
-    property :id, :integer, :required, "Item Id"
-  end
-
-  swagger_model :Items do
-    description "Items"
-    property :items, :array, :required, "A list of items", { "items" => { "$ref" => "Item" } }
-  end
-
-  swagger_controller :items, 'Items'
+  swagger_controller :menus, 'Menus'
 
   swagger_api :index do
     summary 'Returns all menus'
@@ -32,24 +22,24 @@ class MenusController < ApplicationController
 
   swagger_api :create do
     summary "Creates a new Menu"
-    param :form, :types, :string, :required, "Type such as 'breakfast','lunch','dinner'"
-    param :form, :items_id, :array, :optional, "The items id to add"
+    param :form, "menu[types]", :string, :required, "Type such as 'breakfast','lunch','dinner'"
+    param :form, "menu[items_id]", :array, :optional, "The items id to add"
     response :unauthorized
     response :not_acceptable
   end
 
   swagger_api :update do
-    summary "Updates an existing Item"
-    param :path, :id, :integer, :required, "Item Id"
-    param :form, :types, :string, :optional, "Type such as 'breakfast','lunch','dinner'"
-    param :form, :items_id, :array, :optional, "The items id to add"
+    summary "Updates an existing Menu"
+    param :path, :id, :integer, :required, "Menu Id"
+    param :form, "menu[types]", :string, :optional, "Type such as 'breakfast','lunch','dinner'"
+    param :form, "menu[items_id]", :array, :optional, "The items id to add"
     response :unauthorized
     response :not_found
     response :not_acceptable
   end
 
   swagger_api :destroy do
-    summary "Deletes an existing User item"
+    summary "Deletes an existing Menu"
     param :path, :id, :integer, :optional, "Menu Id"
     response :unauthorized
     response :not_found
@@ -101,6 +91,6 @@ class MenusController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def menu_params
-      params.require(:menu).permit(:type, :item_ids => [])
+      params.require(:menu).permit(:types, :item_ids => [])
     end
 end

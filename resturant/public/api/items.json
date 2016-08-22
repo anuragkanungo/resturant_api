@@ -215,7 +215,7 @@
               "required": false
             }
           ],
-          "summary": "Deletes an existing User item",
+          "summary": "Deletes an existing item",
           "responseMessages": [
             {
               "code": 401,

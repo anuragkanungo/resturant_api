@@ -4,10 +4,10 @@ class UsersController < ApplicationController
   before_action :authorize_employee_request, only: [:index, :show]
   before_action :authorize_admin_request, only: [:delete]
 
-  swagger_controller :users, "User Management"
+  swagger_controller :users, "Users"
 
   swagger_api :index do
-    summary "Fetches all User items"
+    summary "Fetches all Users"
     notes "This lists all the active users"
     response :unauthorized
     response :not_acceptable, "The request you made is not acceptable"
@@ -15,7 +15,7 @@ class UsersController < ApplicationController
   end
 
   swagger_api :show do
-    summary "Fetches a single User item"
+    summary "Fetches a single User"
     param :path, :id, :integer, :optional, "User Id"
     response :ok, "Success", :User
     response :unauthorized
@@ -64,21 +64,6 @@ class UsersController < ApplicationController
     response :not_found
     response :not_acceptable
   end
-
-
-swagger_controller :user_orders, "User Orders"
-
-swagger_api :index do
-    summary "Fetches all UserOrder items"
-    param :path, :user_id, :integer, :required, "User Id"
-    param :query, :page, :integer, :optional, "Page number"
-    response :unauthorized
-    response :not_acceptable
-    response :requested_range_not_satisfiable
-  end
-
-
-
 
   # GET /users
   def index

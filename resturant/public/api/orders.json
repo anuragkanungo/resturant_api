@@ -45,14 +45,21 @@
             },
             {
               "paramType": "form",
-              "name": "amount",
+              "name": "order[amount]",
               "type": "integer",
               "description": "The amount of order",
               "required": true
             },
             {
               "paramType": "form",
-              "name": "items_id",
+              "name": "order[items_id]",
+              "type": "array",
+              "description": "The items id to add",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "order[user_id]",
               "type": "array",
               "description": "The items id to add",
               "required": true
@@ -145,14 +152,21 @@
             },
             {
               "paramType": "form",
-              "name": "amount",
+              "name": "order[amount]",
               "type": "integer",
               "description": "The amount of order",
               "required": false
             },
             {
               "paramType": "form",
-              "name": "items_id",
+              "name": "order[items_id]",
+              "type": "array",
+              "description": "The items id to add",
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "order[user_id]",
               "type": "array",
               "description": "The items id to add",
               "required": false
@@ -220,36 +234,5 @@
       ]
     }
   ],
-  "authorizations": null,
-  "models": {
-    "Item": {
-      "id": "Item",
-      "required": [
-        "id"
-      ],
-      "properties": {
-        "id": {
-          "type": "integer",
-          "description": "Item Id"
-        }
-      },
-      "description": "A Item object"
-    },
-    "Items": {
-      "id": "Items",
-      "required": [
-        "items"
-      ],
-      "properties": {
-        "items": {
-          "type": "array",
-          "description": "A list of items",
-          "items": {
-            "$ref": "Item"
-          }
-        }
-      },
-      "description": "Items"
-    }
-  }
+  "authorizations": null
 }

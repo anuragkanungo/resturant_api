@@ -5,7 +5,7 @@
   "apis": [
     {
       "path": "/api/users.{format}",
-      "description": "User Orders"
+      "description": "Users"
     },
     {
       "path": "/api/orders.{format}",
@@ -13,7 +13,7 @@
     },
     {
       "path": "/api/menus.{format}",
-      "description": "Items"
+      "description": "Menus"
     },
     {
       "path": "/api/items.{format}",
