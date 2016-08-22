@@ -23,9 +23,9 @@ class ItemsController < ApplicationController
 
   swagger_api :create do
     summary "Creates a new Item"
-    param :form, :name, :string, :required, "Name"
-    param :form, :description, :string, :required, "Description"
-    param :form, :price, :decimal, :required, "Price"
+    param :form, "item[name]", :string, :required, "Name"
+    param :form, "item[description]", :string, :required, "Description"
+    param :form, "item[price]", :decimal, :required, "Price"
     response :unauthorized
     response :not_acceptable
   end
@@ -33,9 +33,9 @@ class ItemsController < ApplicationController
   swagger_api :update do
     summary "Updates an existing Item"
     param :path, :id, :integer, :required, "Item Id"
-    param :form, :name, :string, :optional, "Name"
-    param :form, :description, :string, :optional, "Description"
-    param :form, :price, :decimal, :optional, "Price"
+    param :form, "item[name]", :string, :optional, "Name"
+    param :form, "item[description]", :string, :optional, "Description"
+    param :form, "item[price]", :decimal, :optional, "Price"
     response :unauthorized
     response :not_found
     response :not_acceptable

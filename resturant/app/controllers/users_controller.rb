@@ -94,7 +94,7 @@ swagger_api :index do
 
   # POST /users
   def create
-    if @current_user != nil
+    if @current_user
       if @current_user.role != "admin" and (user_params["role"] == "admin" or user_params["role"] == "manager")
         render json: { error: "unauthorized" }, status: :unauthorized
       else
@@ -122,15 +122,19 @@ swagger_api :index do
 
   # PATCH/PUT /users/1
   def update
-    if @current_user == @user or @current_user.role == "admin"
-      if @current_user.role != "admin" and (user_params["role"] == "admin" or user_params["role"] == "manager")
-        render json: { error: "unauthorized" }, status: :unauthorized
-      else
-        if @user.update(user_params)
-          render json: @user
+    if @current_user
+      if @current_user == @user or @current_user.role == "admin"
+        if @current_user.role != "admin" and (user_params["role"] == "admin" or user_params["role"] == "manager")
+          render json: { error: "unauthorized" }, status: :unauthorized
         else
-          render json: @user.errors, status: :unprocessable_entity
+          if @user.update(user_params)
+            render json: @user
+          else
+            render json: @user.errors, status: :unprocessable_entity
+          end
         end
+      else
+        render json: { error: "unauthorized" }, status: :unauthorized
       end
     else
       render json: { error: "unauthorized" }, status: :unauthorized

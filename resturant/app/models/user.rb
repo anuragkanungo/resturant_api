@@ -3,7 +3,7 @@ class User < ApplicationRecord
   validates :name, :email, :address, :phone,  presence: true, on: :create
   validates :email, uniqueness: { case_sensitive: false }, on: :create
   validates :password, presence: true, length: { minimum: 6 }, on: :create
-  validates :role, inclusion: { in: %w(admin manager customer),
+  validates :role, presence: true, inclusion: { in: %w(admin manager customer),
     message: "%{value} is not a valid role" }, allow_nil: false
   has_many :orders
 

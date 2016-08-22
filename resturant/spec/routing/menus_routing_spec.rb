@@ -7,16 +7,8 @@ RSpec.describe MenusController, type: :routing do
       expect(:get => "/menus").to route_to("menus#index")
     end
 
-    it "routes to #new" do
-      expect(:get => "/menus/new").to route_to("menus#new")
-    end
-
     it "routes to #show" do
       expect(:get => "/menus/1").to route_to("menus#show", :id => "1")
-    end
-
-    it "routes to #edit" do
-      expect(:get => "/menus/1/edit").to route_to("menus#edit", :id => "1")
     end
 
     it "routes to #create" do

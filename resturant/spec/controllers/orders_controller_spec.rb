@@ -24,11 +24,11 @@ RSpec.describe OrdersController, type: :controller do
   # Order. As you add validations to Order, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    {amount: 100, item_ids: [], user_id: 2}
   }
 
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    {amount: 100, item_ids: [100], user_id: 101}
   }
 
   # This should return the minimal set of values that should be in the session
@@ -52,50 +52,12 @@ RSpec.describe OrdersController, type: :controller do
     end
   end
 
-  describe "GET #new" do
-    it "assigns a new order as @order" do
-      get :new, params: {}, session: valid_session
-      expect(assigns(:order)).to be_a_new(Order)
-    end
-  end
-
-  describe "GET #edit" do
-    it "assigns the requested order as @order" do
-      order = Order.create! valid_attributes
-      get :edit, params: {id: order.to_param}, session: valid_session
-      expect(assigns(:order)).to eq(order)
-    end
-  end
-
   describe "POST #create" do
     context "with valid params" do
-      it "creates a new Order" do
-        expect {
-          post :create, params: {order: valid_attributes}, session: valid_session
-        }.to change(Order, :count).by(1)
-      end
-
       it "assigns a newly created order as @order" do
         post :create, params: {order: valid_attributes}, session: valid_session
         expect(assigns(:order)).to be_a(Order)
         expect(assigns(:order)).to be_persisted
-      end
-
-      it "redirects to the created order" do
-        post :create, params: {order: valid_attributes}, session: valid_session
-        expect(response).to redirect_to(Order.last)
-      end
-    end
-
-    context "with invalid params" do
-      it "assigns a newly created but unsaved order as @order" do
-        post :create, params: {order: invalid_attributes}, session: valid_session
-        expect(assigns(:order)).to be_a_new(Order)
-      end
-
-      it "re-renders the 'new' template" do
-        post :create, params: {order: invalid_attributes}, session: valid_session
-        expect(response).to render_template("new")
       end
     end
   end
@@ -103,7 +65,7 @@ RSpec.describe OrdersController, type: :controller do
   describe "PUT #update" do
     context "with valid params" do
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+        {amount: 10}
       }
 
       it "updates the requested order" do
@@ -118,26 +80,6 @@ RSpec.describe OrdersController, type: :controller do
         put :update, params: {id: order.to_param, order: valid_attributes}, session: valid_session
         expect(assigns(:order)).to eq(order)
       end
-
-      it "redirects to the order" do
-        order = Order.create! valid_attributes
-        put :update, params: {id: order.to_param, order: valid_attributes}, session: valid_session
-        expect(response).to redirect_to(order)
-      end
-    end
-
-    context "with invalid params" do
-      it "assigns the order as @order" do
-        order = Order.create! valid_attributes
-        put :update, params: {id: order.to_param, order: invalid_attributes}, session: valid_session
-        expect(assigns(:order)).to eq(order)
-      end
-
-      it "re-renders the 'edit' template" do
-        order = Order.create! valid_attributes
-        put :update, params: {id: order.to_param, order: invalid_attributes}, session: valid_session
-        expect(response).to render_template("edit")
-      end
     end
   end
 
@@ -147,12 +89,6 @@ RSpec.describe OrdersController, type: :controller do
       expect {
         delete :destroy, params: {id: order.to_param}, session: valid_session
       }.to change(Order, :count).by(-1)
-    end
-
-    it "redirects to the orders list" do
-      order = Order.create! valid_attributes
-      delete :destroy, params: {id: order.to_param}, session: valid_session
-      expect(response).to redirect_to(orders_url)
     end
   end
 

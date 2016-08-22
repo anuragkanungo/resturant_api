@@ -5,7 +5,7 @@
   "resourcePath": "items",
   "apis": [
     {
-      "path": "/items.json",
+      "path": "/orders/{order_id}/items.json",
       "operations": [
         {
           "parameters": [
@@ -32,7 +32,7 @@
       ]
     },
     {
-      "path": "/items.json",
+      "path": "/orders/{order_id}/items.json",
       "operations": [
         {
           "parameters": [
@@ -45,21 +45,21 @@
             },
             {
               "paramType": "form",
-              "name": "name",
+              "name": "item[name]",
               "type": "string",
               "description": "Name",
               "required": true
             },
             {
               "paramType": "form",
-              "name": "description",
+              "name": "item[description]",
               "type": "string",
               "description": "Description",
               "required": true
             },
             {
               "paramType": "form",
-              "name": "price",
+              "name": "item[price]",
               "type": "decimal",
               "description": "Price",
               "required": true
@@ -84,7 +84,7 @@
       ]
     },
     {
-      "path": "/items/{id}.json",
+      "path": "/orders/{order_id}/items/{id}.json",
       "operations": [
         {
           "parameters": [
@@ -132,7 +132,7 @@
       ]
     },
     {
-      "path": "/items/{id}.json",
+      "path": "/orders/{order_id}/items/{id}.json",
       "operations": [
         {
           "parameters": [
@@ -152,21 +152,21 @@
             },
             {
               "paramType": "form",
-              "name": "name",
+              "name": "item[name]",
               "type": "string",
               "description": "Name",
               "required": false
             },
             {
               "paramType": "form",
-              "name": "description",
+              "name": "item[description]",
               "type": "string",
               "description": "Description",
               "required": false
             },
             {
               "paramType": "form",
-              "name": "price",
+              "name": "item[price]",
               "type": "decimal",
               "description": "Price",
               "required": false
@@ -196,7 +196,7 @@
       ]
     },
     {
-      "path": "/items/{id}.json",
+      "path": "/orders/{order_id}/items/{id}.json",
       "operations": [
         {
           "parameters": [

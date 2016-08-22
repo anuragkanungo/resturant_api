@@ -24,11 +24,11 @@ RSpec.describe MenusController, type: :controller do
   # Menu. As you add validations to Menu, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    {types: "breakfast", item_ids: []}
   }
 
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    {types: "breakfast", item_ids: [100,200,1000]}
   }
 
   # This should return the minimal set of values that should be in the session
@@ -52,21 +52,6 @@ RSpec.describe MenusController, type: :controller do
     end
   end
 
-  describe "GET #new" do
-    it "assigns a new menu as @menu" do
-      get :new, params: {}, session: valid_session
-      expect(assigns(:menu)).to be_a_new(Menu)
-    end
-  end
-
-  describe "GET #edit" do
-    it "assigns the requested menu as @menu" do
-      menu = Menu.create! valid_attributes
-      get :edit, params: {id: menu.to_param}, session: valid_session
-      expect(assigns(:menu)).to eq(menu)
-    end
-  end
-
   describe "POST #create" do
     context "with valid params" do
       it "creates a new Menu" do
@@ -80,30 +65,13 @@ RSpec.describe MenusController, type: :controller do
         expect(assigns(:menu)).to be_a(Menu)
         expect(assigns(:menu)).to be_persisted
       end
-
-      it "redirects to the created menu" do
-        post :create, params: {menu: valid_attributes}, session: valid_session
-        expect(response).to redirect_to(Menu.last)
-      end
-    end
-
-    context "with invalid params" do
-      it "assigns a newly created but unsaved menu as @menu" do
-        post :create, params: {menu: invalid_attributes}, session: valid_session
-        expect(assigns(:menu)).to be_a_new(Menu)
-      end
-
-      it "re-renders the 'new' template" do
-        post :create, params: {menu: invalid_attributes}, session: valid_session
-        expect(response).to render_template("new")
-      end
     end
   end
 
   describe "PUT #update" do
     context "with valid params" do
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+        {types: "lunch"}
       }
 
       it "updates the requested menu" do
@@ -118,26 +86,6 @@ RSpec.describe MenusController, type: :controller do
         put :update, params: {id: menu.to_param, menu: valid_attributes}, session: valid_session
         expect(assigns(:menu)).to eq(menu)
       end
-
-      it "redirects to the menu" do
-        menu = Menu.create! valid_attributes
-        put :update, params: {id: menu.to_param, menu: valid_attributes}, session: valid_session
-        expect(response).to redirect_to(menu)
-      end
-    end
-
-    context "with invalid params" do
-      it "assigns the menu as @menu" do
-        menu = Menu.create! valid_attributes
-        put :update, params: {id: menu.to_param, menu: invalid_attributes}, session: valid_session
-        expect(assigns(:menu)).to eq(menu)
-      end
-
-      it "re-renders the 'edit' template" do
-        menu = Menu.create! valid_attributes
-        put :update, params: {id: menu.to_param, menu: invalid_attributes}, session: valid_session
-        expect(response).to render_template("edit")
-      end
     end
   end
 
@@ -148,12 +96,5 @@ RSpec.describe MenusController, type: :controller do
         delete :destroy, params: {id: menu.to_param}, session: valid_session
       }.to change(Menu, :count).by(-1)
     end
-
-    it "redirects to the menus list" do
-      menu = Menu.create! valid_attributes
-      delete :destroy, params: {id: menu.to_param}, session: valid_session
-      expect(response).to redirect_to(menus_url)
-    end
   end
-
 end
