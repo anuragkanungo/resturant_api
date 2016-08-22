@@ -12,11 +12,11 @@
       "description": "Orders"
     },
     {
-      "path": "/api/items.{format}",
+      "path": "/api/menus.{format}",
       "description": "Items"
     },
     {
-      "path": "/api/menus.{format}",
+      "path": "/api/items.{format}",
       "description": "Items"
     }
   ],

@@ -5,7 +5,7 @@
   "resourcePath": "items",
   "apis": [
     {
-      "path": "/orders/{order_id}/items.json",
+      "path": "/items.json",
       "operations": [
         {
           "parameters": [
@@ -32,7 +32,7 @@
       ]
     },
     {
-      "path": "/orders/{order_id}/items.json",
+      "path": "/items.json",
       "operations": [
         {
           "parameters": [
@@ -84,7 +84,7 @@
       ]
     },
     {
-      "path": "/orders/{order_id}/items/{id}.json",
+      "path": "/items/{id}.json",
       "operations": [
         {
           "parameters": [
@@ -132,7 +132,7 @@
       ]
     },
     {
-      "path": "/orders/{order_id}/items/{id}.json",
+      "path": "/items/{id}.json",
       "operations": [
         {
           "parameters": [
@@ -196,7 +196,7 @@
       ]
     },
     {
-      "path": "/orders/{order_id}/items/{id}.json",
+      "path": "/items/{id}.json",
       "operations": [
         {
           "parameters": [
