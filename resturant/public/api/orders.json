@@ -60,8 +60,8 @@
             {
               "paramType": "form",
               "name": "order[user_id]",
-              "type": "array",
-              "description": "The items id to add",
+              "type": "integer",
+              "description": "User",
               "required": true
             }
           ],
@@ -167,8 +167,8 @@
             {
               "paramType": "form",
               "name": "order[user_id]",
-              "type": "array",
-              "description": "The items id to add",
+              "type": "integer",
+              "description": "User",
               "required": false
             }
           ],

@@ -33,7 +33,7 @@ class OrdersController < ApplicationController
     summary "Creates a new Order"
     param :form, "order[amount]", :integer, :required, "The amount of order"
     param :form, "order[items_id]", :array, :required, "The items id to add"
-    param :form, "order[user_id]", :array, :required, "The items id to add"
+    param :form, "order[user_id]", :integer, :required, "User"
     response :unauthorized
     response :not_acceptable
   end
@@ -43,7 +43,7 @@ class OrdersController < ApplicationController
     param :path, :id, :integer, :required, "Order Id"
     param :form, "order[amount]", :integer, :optional, "The amount of order"
     param :form, "order[items_id]", :array, :optional, "The items id to add"
-    param :form, "order[user_id]", :array, :optional, "The items id to add"
+    param :form, "order[user_id]", :integer, :optional, "User"
     response :unauthorized
     response :not_found
     response :not_acceptable
