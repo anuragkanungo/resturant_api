@@ -15,19 +15,20 @@ Things you may want to cover:
 * Install and Setup Postgres SQL
 This can help http://stackoverflow.com/questions/7975556/how-to-start-postgresql-server-on-mac-os-x
 
-* Dependencies: Run "bundle install"
+* Dependencies: Run ```bundle install```
 
-* Database creation: Run "rake db:create" and "rake db:migrate"
+* Database creation: Run ```rake db:create``` and ```rake db:migrate```
 
 * Database initialization Run "rake db:seed"
 This creates a Admin user with email : "admin@example.com" and password: "admin123"
 
-*To run the test_suite: bundle exec rspec spec
+* To run the test_suite:
+```bundle exec rspec spec```
 Currently some tests are failing as I am having some difficultly while creating stub for authentication token. If we remove the before action for authentication and authorization from the controllers, the test would pass.
 
 
 * To run the application:
-Run "rails s"
+```rails s```
 
 In the browser navigate to "localhost:3000/api", this will take you to Swagger API documentation, where the api endpoints can be visualized and tested by making a request.
 
